@@ -38,18 +38,6 @@ public class CatServer {
         }, 300 * 1000);
     }
 
-    public static boolean isSendDataSerializers(Map<String, String> modList) {
-        String forgeVersion = modList.get("forge");
-        if (forgeVersion != null) {
-            try {
-                if (Integer.valueOf(forgeVersion.split("\\.")[3]) < 2826) {
-                    return false;
-                }
-            } catch (Exception ignored) {}
-        }
-        return true;
-    }
-
     public static CatServerConfig getConfig() {
         return config;
     }

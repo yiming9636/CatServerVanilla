@@ -156,7 +156,6 @@ public class NetworkDispatcher extends SimpleChannelInboundHandler<Packet<?>> im
         else
         {
             serverInitiateHandshake();
-            FMLLog.log.info("Connection received without FML marker, assuming vanilla.");
             insertIntoChannel();
             this.completeServerSideConnection(ConnectionType.VANILLA);
         }
@@ -173,7 +172,6 @@ public class NetworkDispatcher extends SimpleChannelInboundHandler<Packet<?>> im
         // Insert ourselves into the pipeline
         this.manager.channel().pipeline().addBefore("packet_handler", "fml:packet_handler", this);
         if (this.state != null) {
-            FMLLog.log.info("Opening channel which already seems to have a state set. This is a vanilla connection. Handshake handler will stop now");
             this.manager.channel().config().setAutoRead(true);
             return;
         }

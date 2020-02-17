@@ -99,14 +99,7 @@
                  return serverstatusresponse;
              }
  
-@@ -203,10 +208,52 @@
-                     jsonobject.addProperty("favicon", p_serialize_1_.getFavicon());
-                 }
- 
-+                if (!catserver.server.CatServer.getConfig().disableFMLStatusModInfo) {
-+                    net.minecraftforge.fml.common.network.internal.FMLNetworkHandler.enhanceStatusQuery(jsonobject);
-+                }
-                 return jsonobject;
+@@ -207,6 +212,45 @@
              }
          }
  
@@ -152,7 +145,7 @@
      public static class Version
          {
              private final String name;
-@@ -228,15 +275,15 @@
+@@ -228,15 +272,15 @@
                  return this.protocol;
              }
  

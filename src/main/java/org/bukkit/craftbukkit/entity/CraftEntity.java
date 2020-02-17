@@ -90,7 +90,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
 import org.bukkit.EntityEffect;
@@ -131,11 +130,8 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
             // Players
             if (entity instanceof EntityPlayer) {
                 // CatServer start - support fake player
-                if (entity instanceof EntityPlayerMP) {
-                    if (entity instanceof FakePlayer) { return new CraftFakePlayer(server, (FakePlayer) entity); }
-                    else { return new CraftPlayer(server, (EntityPlayerMP) entity); }
-                }
-                else { return new CraftFakePlayer(server, FakePlayerFactory.get(DimensionManager.getWorld(entity.world.provider.getDimension()), ((EntityPlayer) entity).getGameProfile())); }
+                if (entity instanceof EntityPlayerMP) { return new CraftPlayer(server, (EntityPlayerMP) entity); }
+                else { return new CraftPlayer(server, FakePlayerFactory.get(DimensionManager.getWorld(entity.world.provider.getDimension()), ((EntityPlayer) entity).getGameProfile())); }
                 // CatServer end
             }
             // Water Animals

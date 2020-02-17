@@ -13,22 +13,14 @@ public class CatServerConfig {
 
     public boolean hopperAsync = false;
     public boolean entityMoveAsync = true;
-    public boolean modMobAsync = false;
     public int entityPoolNum = 3;
 
     public boolean keepSpawnInMemory = true;
     public boolean enableSkipEntityTick = true;
     public boolean enableSkipTileEntityTick = false;
-    public boolean enableCapture = true;
     public long worldGenMaxTickTime = 15000000L;
-    public List<String> disableForgeGenerateWorlds = Arrays.asList("ExampleCustomWorld");
-
-    public List<String> fakePlayerPermissions = Arrays.asList("essentials.build");
-    public boolean fakePlayerEventPass = false;
 
     public boolean disableUpdateGameProfile = true;
-    public boolean disableFMLHandshake = false;
-    public boolean disableFMLStatusModInfo = false;
 
     public CatServerConfig(String file) {
         this.configFile = new File(file);
@@ -39,22 +31,14 @@ public class CatServerConfig {
         // async
         hopperAsync = getOrWriteBooleanConfig("async.hopper", hopperAsync);
         entityMoveAsync = getOrWriteBooleanConfig("async.entityMove", entityMoveAsync);
-        modMobAsync = getOrWriteBooleanConfig("async.modMob", modMobAsync);
         entityPoolNum = getOrWriteIntConfig("async.asyncPoolNum", entityPoolNum);
         // world
         keepSpawnInMemory = getOrWriteBooleanConfig("world.keepSpawnInMemory", keepSpawnInMemory);
         enableSkipEntityTick = getOrWriteBooleanConfig("world.enableSkipEntityTick", enableSkipEntityTick);
         enableSkipTileEntityTick = getOrWriteBooleanConfig("world.enableSkipTileEntityTick", enableSkipTileEntityTick);
-        enableCapture = getOrWriteBooleanConfig("world.enableCapture", enableCapture);
         worldGenMaxTickTime = getOrWriteIntConfig("world.worldGenMaxTick", 15) * 1000000;
-        disableForgeGenerateWorlds = getOrWriteStringListConfig("world.disableForgeGenerateWorlds", disableForgeGenerateWorlds);
-        // fakeplayer
-        fakePlayerPermissions = getOrWriteStringListConfig("fakePlayer.permissions", fakePlayerPermissions);
-        fakePlayerEventPass = getOrWriteBooleanConfig("fakePlayer.eventPass", fakePlayerEventPass);
         // general
         disableUpdateGameProfile = getOrWriteBooleanConfig("disableUpdateGameProfile", disableUpdateGameProfile);
-        disableFMLHandshake = getOrWriteBooleanConfig("disableFMLHandshake", disableFMLHandshake);
-        disableFMLStatusModInfo = getOrWriteBooleanConfig("disableFMLStatusModInfo", disableFMLStatusModInfo);
         // save config
         try {
             config.save(configFile);

@@ -13,7 +13,7 @@
  
      public C00Handshake()
      {
-@@ -28,18 +29,28 @@
+@@ -28,18 +29,25 @@
          this.requestedState = p_i47613_3_;
      }
  
@@ -30,10 +30,7 @@
 +        this.ip = buf.readString(Short.MAX_VALUE); // Spigot
          this.port = buf.readUnsignedShort();
          this.requestedState = EnumConnectionState.getById(buf.readVarInt());
-+        this.hasFMLMarker = this.ip.contains("\0FML\0");
-+        if (this.hasFMLMarker) {
-+            this.ip = this.ip.replace("\0FML\0", "");
-+        }else if (this.ip.split("\0").length>2) this.hasFMLMarker = true; //CatServer - Bungee support
++        this.hasFMLMarker = false;
      }
  
      public void writePacketData(PacketBuffer buf) throws IOException
@@ -44,7 +41,7 @@
          buf.writeShort(this.port);
          buf.writeVarInt(this.requestedState.getId());
      }
-@@ -58,4 +69,9 @@
+@@ -58,4 +66,9 @@
      {
          return this.protocolVersion;
      }

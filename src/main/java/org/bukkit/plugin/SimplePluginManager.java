@@ -18,8 +18,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import catserver.server.CatServer;
-import catserver.server.entity.CraftFakePlayer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -29,7 +27,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -474,7 +471,6 @@ public final class SimplePluginManager implements PluginManager {
      * @param event Event details
      */
     public void callEvent(Event event) {
-        if (CatServer.getConfig().fakePlayerEventPass && event instanceof PlayerEvent && ((PlayerEvent) event).getPlayer() instanceof CraftFakePlayer) return; // CatServer
         if (event.isAsynchronous() || !server.isPrimaryThread()) { // CatServer
             if (Thread.holdsLock(this)) {
                 throw new IllegalStateException(event.getEventName() + " cannot be triggered asynchronously from inside synchronized code.");
