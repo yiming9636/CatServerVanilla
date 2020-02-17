@@ -366,6 +366,7 @@ public class Loader
      */
     private ModDiscoverer identifyMods(List<String> additionalContainers)
     {
+        if (true) return new ModDiscoverer(); // CatServer - vanilla
         injectedContainers.addAll(additionalContainers);
         FMLLog.log.debug("Building injected Mod Containers {}", injectedContainers);
         mods.add(minecraft);
@@ -472,6 +473,7 @@ public class Loader
      */
     private void initializeLoader()
     {
+        if (true) return; // CatServer - vanilla
         File modsDir = new File(minecraftDir, "mods");
         File configDir = new File(minecraftDir, "config");
         String canonicalModsPath;

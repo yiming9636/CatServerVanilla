@@ -27,16 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.security.CodeSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -73,6 +64,7 @@ public class LibraryManager
 
     public static void setup(File minecraftHome)
     {
+        if (true) return; // CatServer - vanilla
         File libDir = findLibraryFolder(minecraftHome);
         FMLLog.log.debug("Determined Minecraft Libraries Root: {}", libDir);
         Repository old = Repository.replace(libDir, "libraries");

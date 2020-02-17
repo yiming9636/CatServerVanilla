@@ -313,7 +313,7 @@ public class CoreModManager {
 
     private static void discoverCoreMods(File mcDir, LaunchClassLoader classLoader)
     {
-
+        if (true) return; // CatServer - vanilla
         File modsDir = setupCoreModDir(mcDir);
         File modsDirVer = new File(modsDir, FMLInjectionData.mccversion);
 
