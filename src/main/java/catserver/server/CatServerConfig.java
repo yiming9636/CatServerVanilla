@@ -20,7 +20,7 @@ public class CatServerConfig {
     public boolean enableSkipTileEntityTick = false;
     public long worldGenMaxTickTime = 15000000L;
 
-    public boolean disableUpdateGameProfile = true;
+    public boolean disableUpdateGameProfile = false;
 
     public CatServerConfig(String file) {
         this.configFile = new File(file);
