@@ -148,15 +148,6 @@
                      {
                          this.heightMap[k << 4 | j] = l;
  
-@@ -206,7 +258,7 @@
-         {
-             for (int k = 0; k < 16; ++k)
-             {
--                this.precipitationHeightMap[j + (k << 4)] = -999;
-+                this.precipitationHeightMap[j + k << 4] = -999;
- 
-                 for (int l = i + 16; l > 0; --l)
-                 {
 @@ -452,12 +504,13 @@
  
      public int getBlockLightOpacity(BlockPos pos)
@@ -564,7 +555,7 @@
          if (this.isTerrainPopulated())
          {
              if (generator.generateStructures(this, this.x, this.z))
-@@ -1008,8 +1211,32 @@
+@@ -1008,8 +1211,30 @@
          {
              this.checkLight();
              generator.populate(this.x, this.z);
@@ -588,16 +579,14 @@
 +            }
 +            BlockSand.fallInstantly = false;
 +            this.world.getServer().getPluginManager().callEvent(new org.bukkit.event.world.ChunkPopulateEvent(bukkitChunk));
-+            if (world != null && !CatServer.getConfig().disableForgeGenerateWorlds.contains(world.getName())) {
-+                net.minecraftforge.fml.common.registry.GameRegistry.generateWorld(this.x, this.z, this.world, generator, this.world.getChunkProvider());
-+            }
++            net.minecraftforge.fml.common.registry.GameRegistry.generateWorld(this.x, this.z, this.world, generator, this.world.getChunkProvider());
              this.markDirty();
          }
 +        populating = prev;
      }
  
      public BlockPos getPrecipitationHeight(BlockPos pos)
-@@ -1064,7 +1291,7 @@
+@@ -1064,7 +1289,7 @@
          {
              BlockPos blockpos = this.tileEntityPosQueue.poll();
  
@@ -606,7 +595,7 @@
              {
                  TileEntity tileentity = this.createNewTileEntity(blockpos);
                  this.world.setTileEntity(blockpos, tileentity);
-@@ -1075,7 +1302,7 @@
+@@ -1075,7 +1300,7 @@
  
      public boolean isPopulated()
      {
@@ -615,7 +604,7 @@
      }
  
      public boolean wasTicked()
-@@ -1128,6 +1355,13 @@
+@@ -1128,6 +1353,13 @@
      @SideOnly(Side.CLIENT)
      public void read(PacketBuffer buf, int availableSections, boolean groundUpContinuous)
      {
@@ -629,7 +618,7 @@
          boolean flag = this.world.provider.hasSkyLight();
  
          for (int i = 0; i < this.storageArrays.length; ++i)
-@@ -1176,10 +1410,16 @@
+@@ -1176,10 +1408,16 @@
          this.isTerrainPopulated = true;
          this.generateHeightMap();
  
@@ -646,7 +635,7 @@
      }
  
      public Biome getBiome(BlockPos pos, BiomeProvider provider)
-@@ -1190,7 +1430,13 @@
+@@ -1190,7 +1428,13 @@
  
          if (k == 255)
          {
@@ -661,7 +650,7 @@
              k = Biome.getIdForBiome(biome);
              this.blockBiomeArray[j << 4 | i] = (byte)(k & 255);
          }
-@@ -1244,13 +1490,13 @@
+@@ -1244,13 +1488,13 @@
                      BlockPos blockpos1 = blockpos.add(k, (j << 4) + i1, l);
                      boolean flag = i1 == 0 || i1 == 15 || k == 0 || k == 15 || l == 0 || l == 15;
  
@@ -677,7 +666,7 @@
                              {
                                  this.world.checkLight(blockpos2);
                              }
-@@ -1381,7 +1627,7 @@
+@@ -1381,7 +1625,7 @@
          {
              blockpos$mutableblockpos.setPos(blockpos$mutableblockpos.getX(), l, blockpos$mutableblockpos.getZ());
  
@@ -686,7 +675,7 @@
              {
                  this.world.checkLight(blockpos$mutableblockpos);
              }
-@@ -1420,6 +1666,7 @@
+@@ -1420,6 +1664,7 @@
          else
          {
              System.arraycopy(newHeightMap, 0, this.heightMap, 0, this.heightMap.length);
@@ -694,7 +683,7 @@
          }
      }
  
-@@ -1489,4 +1736,55 @@
+@@ -1489,4 +1734,55 @@
          QUEUED,
          CHECK;
      }
